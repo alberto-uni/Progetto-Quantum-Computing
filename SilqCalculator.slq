@@ -1,0 +1,16 @@
+def main() {
+ 
+    n := 10:!int[8];
+    return integerToBinary(10:!int[8]);
+    //x := n: !int[8];
+    //return(x[7],x[6],x[5],x[4],x[3], x[2], x[1], x[0]) ;
+}
+
+
+
+def integerToBinary( x:!int[8])qfree{
+    
+    //x := n;
+    return(x[7],x[6],x[5],x[4],x[3], x[2], x[1], x[0]) ;
+
+}
