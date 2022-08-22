@@ -1,0 +1,36 @@
+
+def main() {
+ 
+    //x := n: !int[8];
+    //return(x[7],x[6],x[5],x[4],x[3], x[2], x[1], x[0]) ;
+
+
+
+    in1 := [0,0,0,0,0,0,1,1] ; //intero
+    in2 := [0,0,0,0,0,1,1,1] ; //intero
+
+
+    //sono già paddati e so la lunghezza
+
+    qubits_in1 := vector(8,0:B); // vector of length n filled with zeros
+    for i in [0..8){
+        if in1[i] == 1 {
+            qubits_in1[i] := X(qubits_in1[i]);
+        }    
+    }
+
+    qubits_in2 := vector(8,0:B); // vector of length n filled with zeros
+    for i in [0..8){
+        if in2[i] == 1 {
+            qubits_in2[i] := X(qubits_in2[i]);
+        }    
+    }
+
+
+
+    return(qubits_in1,qubits_in2)
+   
+}
+
+
+
