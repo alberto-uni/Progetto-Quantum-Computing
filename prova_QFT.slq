@@ -3,12 +3,12 @@
 def main() {
  
     //CIAO SVRIVI L'INPUT QUA DIPIERRO GRAZZZZIE RAGAZZI
-    input := 1 ;
-    ψ := input as int[1] ;
+    input := 6 ;
+    ψ := input as int[8] ;
     res1 := QFT(ψ);
-    res := reverse(QFT[1])(res1) ;
+    res := reverse(QFT[8])(res1) ;
 	//res :=  reverse(QFT[1])(ψ)  ;
-    return(res);
+    return(measure(res));
 
 }
 
