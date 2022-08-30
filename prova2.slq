@@ -1,0 +1,46 @@
+
+//MAIN
+def main() {
+ 
+    /*
+    a :=  [0,0,0,0,0,1,0,1] ; //5
+
+    a_q := vector(8,0:B); // vector of length n filled with zeros    // 00000000 QUBIT B
+    for i in [0..8){
+        if a[i] == 1 {
+            a_q[i] := X(a_q[i]);
+        }    
+    } 
+
+    //return(a_q)
+    */
+    ψ := (0,0,0,0,0,1,0,1):ℕ^8  ;
+	return ψ;
+}
+
+
+
+//QFT
+def QFT[n:!ℕ](ψ: int[n])mfree: int[n]{
+    for k in [0..n div 2){
+        (ψ[k],ψ[n-k-1]) := (ψ[n-k-1],ψ[k]);
+    }
+    for k in [0..n){
+        ψ[k] := H(ψ[k]);
+        for l in [k+1..n){
+            if ψ[l] && ψ[k]{
+                phase(2*π * 2^(k-l-1));
+            }
+        }
+    }
+    return ψ;
+}
+
+
+
+
+
+
+
+
+

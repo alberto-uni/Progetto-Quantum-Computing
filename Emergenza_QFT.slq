@@ -2,27 +2,24 @@
 //MAIN
 def main(){
  
-    
-    input_1 := 1 : int[3];    
-    //input_2 := 0  : int[2] ;  //qubit interi [][][][]IT
- 
+    //CIAO SVRIVI L'INPUT QUA DIPIERRO GRAZZZZIE RAGAZZI
+    input := 2 ;    
+    input_2 := 2  : int[4] ;  //qubit interi [][][][]
+    //INPUT COME ARRAY DI QUBIT
+    ψ := input as int[4] ;
 
     //QFT
-    output_qft := QFT(input_1);
-    //output_qft2 := QFT(input_2);
-   
-
-
-    //EVOLVE_QFT faccio la somma
-    output__evolve_qft := EVOLVE_QFT(output_qft);
+    //output_qft := QFT(ψ);
     
- 
+    //EVOLVE_QFT
+    //res := EVOLVE_QFT(output_qft);
+
+    res := measure(ψ  + input_2) ;
 
     //INVERSE QFT
-    result := reverse(QFT[3])(output__evolve_qft) ;
+    //result := reverse(QFT[8])(res) ;
 	//MISURA PER TORNARE ALL'ORIGINALE
-    final :=  measure(result) ;
-    return( final[2],final[1],final[0]  );
+    return(   res  );
 
 }
 
@@ -59,33 +56,28 @@ def QFT[n:!ℕ](ψ: int[n])mfree: int[n]{
 
 /***********************************/
 
-
+/*
 def EVOLVE_QFT[n:!ℕ](ψ: int[n] )mfree: int[n]{
-    //001
-    //100
-    b := 4:int[n] ; // ->1
 
-    //for k in [0..n div 2){
-    //    (b[k],b[n-k-1]) := (b[n-k-1],b[k]);
-    //}
+    b := 5:int[8] ;
+
+     for k in [0..n div 2){
+        (b[k],b[n-k-1]) := (b[n-k-1],b[k]);
+    }
 
 
     for k in [0..n){
-
-        //ψ[k] := H(ψ[k]);
+        ψ[k] := H(ψ[k]);
         for l in [k+1..n){
-            if ( (n - i) <= l - 1) {
-                if b[l] && ψ[k]{
-                    phase(2*π * 2^(k-l-1));
-                }
-            }    
+            if ψ[l] && ψ[k]{
+                phase(2*π * 2^(k-l-1));
+            }
         }
     }
-    
-
-    return( ψ  ) ;
+        
+    return(  ψ )  ;
 } 
-
+*/
 
 /***********************************/
 /*
