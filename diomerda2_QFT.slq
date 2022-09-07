@@ -1,0 +1,174 @@
+
+//MAIN
+def main(){
+ 
+    //CIAO SVRIVI L'INPUT QUA DIPIERRO GRAZZZZIE RAGAZZI
+    input := 3 ;    
+    input_2 := 2  : int[4] ;  //qubit interi [][][][]
+    //INPUT COME ARRAY DI QUBIT
+    ψ := input as int[4] ;
+
+    //QFT
+    output_qft := QFT(ψ);
+    
+    //EVOLVE_QFT
+    output_qft := EVOLVE_QFT(output_qft, input_2);
+
+
+    //INVERSE QFT
+    output_qft:=reverse(QFT[4])(output_qft);
+
+    return(output_qft);
+	//MISURA PER TORNARE ALL'ORIGINALE
+
+}
+
+
+
+//QFT
+def QFT[n:!ℕ](ψ: int[n])mfree: int[n]{
+    for k in [0..n div 2){
+        (ψ[k],ψ[n-k-1]) := (ψ[n-k-1],ψ[k]);
+    }
+                                        
+    for l in (n..0] {        
+        ψ[l] := H(ψ[l]) ;        //parto dall'ultimo e gli applico hadamard
+        for i in [0..l) { 
+            A:=ψ[l-i-1]:𝔹;         //
+            if A{
+                ψ[l]:=rotZ(π/(2^(i+1)),ψ[l]);
+            }
+           // measure(A);
+
+        }
+    }
+
+    return( ψ ) ;
+} 
+
+
+
+def EVOLVE_QFT[n:!ℕ](A: int[n], B:int[n] ): int[n]{
+    for k in [0..n div 2){
+        (B[k],B[n-k-1]) := (B[n-k-1],B[k]);
+    }
+    for l in (n..0]{
+        for i in [0..l+1){
+            if (l-i)<=n-1{
+                if B[l-i] {
+                    rotZ(π/(2^(i)), A[l]);
+                }
+            }
+        }
+    }
+    m:=measure(B);
+    return(A);
+
+
+}
+
+def REV_QFT[n:!ℕ](ψ: int[n]): int[n]{
+        for l in [0..n+1) {
+         for i in [0..l) {          
+            if ψ[i] && ψ[l]{
+                phase(-π/(2^(l-i)));
+            }
+        }
+        ψ[l] := H(ψ[l]) ;
+
+              
+           
+    }
+
+    return (ψ);
+}
+
+
+
+/*********************************/
+/*
+  qc.h(reg[n])    
+    for i in range(0, n):
+        #cp(theta, control_qubit, target_qubit[, …])
+        qc.cp(pie/float(2**(i+1)), reg[n-(i+1)], reg[n])
+*/        
+
+/***********************************/
+
+/*
+def EVOLVE_QFT[n:!ℕ](ψ: int[n] )mfree: int[n]{
+
+    b := 5:int[8] ;
+
+     for k in [0..n div 2){
+        (b[k],b[n-k-1]) := (b[n-k-1],b[k]);
+    }
+
+
+    for k in [0..n){
+        ψ[k] := H(ψ[k]);
+        for l in [k+1..n){
+            if ψ[l] && ψ[k]{
+                phase(2*π * 2^(k-l-1));
+            }
+        }
+    }
+        
+    return(  ψ )  ;
+} 
+*/
+
+/***********************************/
+/*
+ l = len(reg_b)
+    for i in range(n+1):
+        if (n - i) > l - 1:
+            pass
+        else:
+            #cp(theta, control_qubit, target_qubit[, ...])
+            qc.cp(pie/float(2**(i)), reg_b[n-i], reg_a[n])
+*/
+/***********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Phase Estimation algorithm
+/*
+import qft;
+
+def phaseEstimation[k:!ℕ](
+    U:int[k] !->mfree int[k],
+    u:int[k], 
+    precision:!ℕ) 
+    {
+
+    ancilla := 0:int[precision];
+    for i in [0..precision) { ancilla[i] := H(ancilla[i]); }
+
+    for i in [0..precision) { 
+        if ancilla[i] {
+            for l in [0..2^i) {
+                u := U(u);
+            }
+        }
+    }
+
+    ancilla := reverse(QFT[precision])(ancilla);
+    result := measure(ancilla);
+    measure(u);
+    return result;
+}
+*/
+
+
