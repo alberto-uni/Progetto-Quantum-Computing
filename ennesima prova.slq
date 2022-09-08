@@ -1,0 +1,130 @@
+
+//MAIN
+def main(){
+ 
+    //CIAO SVRIVI L'INPUT QUA DIPIERRO GRAZZZZIE RAGAZZI
+    input_1 :=  2 : int[2] ;    
+    input_1_n := dup(input_1) ;
+    input_2 := 2  : int[4] ;  //qubit interi [][][][]
+    //INPUT COME ARRAY DI QUBIT
+    //(0.353553-0.353553i)·|0⟩+(0.353553+0.353553i)·|1⟩+(-0.353553-0.353553i)·|-1⟩+(-0.353553+0.353553i)·|-2⟩
+
+    //QFT
+    output_qft := QFT_new(input_1);
+    //output_qft := QFT(input_1);
+
+    //dump();
+
+    //EVOLVE_QFT
+    //output_qft := EVOLVE_QFT(output_qft, input_2);
+
+
+    //INVERSE QFT
+    output_qft:=rev_QFT(output_qft);
+    //final := measure(output_qft);
+    return(output_qft) ;
+	//MISURA PER TORNARE ALL'ORIGINALE
+
+}
+
+
+
+
+//QFT NUOVA
+def QFT_new[n:!ℕ](a: int[n]): int[n]{
+
+    /*
+	for k in [0..n div 2){
+		(ψ[k],ψ[n-k-1]) := (ψ[n-k-1],ψ[k]);
+	}
+    */
+
+    for k in [0..n){
+        a[k] := H(a[k]);
+        for l in [k+1..n){ 
+                b:=dup(a[l]);   
+                if b{
+                    a[k] := rotZ(π/(2^(l-k)),a[k]);
+            }
+            measure(b);
+        }
+    }
+    return a ;
+}
+
+//QFT
+def QFT[n:!ℕ](ψ: int[n])mfree: int[n]{
+
+    /*
+	for k in [0..n div 2){
+		(ψ[k],ψ[n-k-1]) := (ψ[n-k-1],ψ[k]);
+	}
+    */
+
+	for k in [0..n){
+		ψ[k] := H(ψ[k]);
+		for l in [k+1..n){
+			if ψ[l] && ψ[k]{
+				phase(2*π * 2^(k-l-1));
+			}
+		}
+	}
+	return ψ;
+}
+
+
+
+def EVOLVE_QFT[n:!ℕ](a: int[n],const b: int[n])mfree: int[n]{
+
+    /*
+	for k in [0..n div 2){
+		(a[k],a[n-k-1]) := (a[n-k-1],a[k]);
+	}
+    */
+
+    for k in [0..n){
+        for l in [0..n){
+            if l >= k {
+                if b[l]{
+                    a[k] := rotZ(π/(2^(l-k)),a[k]);
+                } 
+            }
+        }
+    }
+    return a ;
+}
+
+
+def rev_QFT[n:!ℕ](a: int[n]): int[n]{
+
+    /*
+	for k in [0..n div 2){
+		(ψ[k],ψ[n-k-1]) := (ψ[n-k-1],ψ[k]);
+	}
+    */
+
+	for k in (n..0]{
+        a[k] := H(a[k]);
+        for l in (k..0]{
+            b:=dup(a[l]);
+            if b{
+                a[k]:=rotZ(-π/(2^(k-l)), a[k]);
+            }
+            measure(b);
+        }
+        
+
+	}
+    	return a;
+        
+}
+
+
+
+
+
+	
+
+
+
+
