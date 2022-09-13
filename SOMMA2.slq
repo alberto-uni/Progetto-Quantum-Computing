@@ -1,0 +1,112 @@
+def main(){
+a:=2:!int[4];
+b:=3:!int[4];
+
+a_0:=a[0]:B;
+a_1:=a[1]:B;
+a_2:=a[2]:B;
+a_3:=a[3]:B;
+
+b_0:=b[0]:B;
+b_1:=b[1]:B;
+b_2:=b[2]:B;
+b_3:=b[3]:B;
+
+
+a_3:=H(a_3);    //inizio qft
+if a_2{
+    a_3:=rotZ(π/2, a_3);
+}
+if a_1{
+    a_3:=rotZ(π/4, a_3);
+}
+if a_0{
+    a_3:=rotZ(π/8, a_3); 
+}
+
+a_2:=H(a_2);
+if a_1{
+    a_2:=rotZ(π/2, a_2); 
+}
+if a_0{
+    a_2:=rotZ(π/4, a_2);
+}
+
+a_1:=H(a_1);
+if a_0{
+    a_1:=rotZ(π/2, a_1);
+}
+a_0:=H(a_0);           //fine qft
+
+if(b_3){
+     a_3:=rotZ(π, a_3);
+}
+
+if(b_2){
+     a_3:=rotZ(π/2, a_3);
+}
+
+if(b_1){
+     a_3:=rotZ(π/4, a_3);
+}
+
+if(b_0){
+     a_3:=rotZ(π/8, a_3);
+}
+
+if(b_2){
+     a_2:=rotZ(π, a_2);
+}
+
+if(b_1){
+     a_2:=rotZ(π/2, a_2);
+}
+
+if(b_0){
+     a_2:=rotZ(π/4, a_2);
+}
+
+if(b_1){
+     a_1:=rotZ(π, a_1);
+}
+
+if(b_0){
+     a_1:=rotZ(π/2, a_1);
+}
+
+if(b_0){
+     a_0:=rotZ(π, a_0);
+}
+
+
+//inizio inversa
+a_0:=H(a_0);
+
+if (a_0){
+    a_1:=rotZ(-π/2, a_1);
+}
+a_1:=H(a_1);
+
+if (a_0){
+    a_2:=rotZ(-π/4, a_2);
+}
+if (a_1){
+    a_2:=rotZ(-π/2, a_2);
+}
+a_2:=H(a_2);
+if (a_0){
+    a_3:=rotZ(-π/8, a_3);
+}
+if (a_1){
+    a_3:=rotZ(-π/4, a_3);
+}
+if (a_2){
+    a_3:=rotZ(-π/2, a_3);
+}
+a_3:=H(a_3);
+x3:=measure(a_3);
+x2:=measure(a_2);
+x1:=measure(a_1);
+x0:=measure(a_0);
+return(x3*8+x2*4+x1*2+x0);
+ }
