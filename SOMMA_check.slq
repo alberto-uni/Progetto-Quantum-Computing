@@ -3,9 +3,13 @@
 
 
 def main(){
+
+/*--------------input -----------------*/
 a_input:=-1;
 b_input:=15;
 
+
+/*--------------input check------------*/
 if( a_input < 0  || a_input>15 || b_input<0 || b_input>15) {
     return(-9999999);
 }
@@ -15,7 +19,7 @@ a:= a_input as !int[4];
 b:= b_input as !int[4];
 
 
-/*--------------input check------------*/
+
 
 
 
