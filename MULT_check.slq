@@ -8,7 +8,7 @@ b_input:=6;
 
 
 /*--------------input check------------*/
-if( a_input < 0  || a_input>15 || b_input<0 || b_input>15) {
+if( a_input < 0  || a_input>7 || b_input<0 || b_input>7) {
     return(-9999999);
 }
 
