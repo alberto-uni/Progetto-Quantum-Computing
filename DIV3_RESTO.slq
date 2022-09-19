@@ -1,6 +1,6 @@
 def main(){
-a:=2:!int[3];
-b:=3:!int[3];
+a:=6:!int[3];
+b:=2:!int[3];
 if b==0{
     return (-1, -1);
 }
